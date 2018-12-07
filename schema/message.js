@@ -20,7 +20,8 @@ export default `
   }
 
   type Query {
-    messages(cursor: String, channelId: Int!): [Message!]!
+    messages(cursor: String, channelId: Int!): [Message!]!,
+    getData(date1: String!, date2: String!): [Message!]!
   }
 
   type Mutation {

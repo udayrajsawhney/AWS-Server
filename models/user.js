@@ -1,4 +1,3 @@
-import bcrypt from 'bcrypt';
 
 export default (sequelize, DataTypes) => {
   const User = sequelize.define(
@@ -37,13 +36,16 @@ export default (sequelize, DataTypes) => {
           },
         },
       },
+      masterId: {
+        type: DataTypes.INTEGER,
+        unique: true,
+      }
     },
     {
       hooks: {
         afterValidate: async (user) => {
-          const hashedPassword = await bcrypt.hash(user.password, 12);
           // eslint-disable-next-line no-param-reassign
-          user.password = hashedPassword;
+          user.password = null;
         },
       },
     },

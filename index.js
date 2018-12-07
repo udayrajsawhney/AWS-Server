@@ -14,7 +14,7 @@ import formidable from 'formidable';
 import models from './models';
 import { refreshTokens } from './auth';
 
-const SECRET = 'asiodfhoi1hoi23jnl1kejd';
+const SECRET = '31e0a8d38ad738fcf4f4f996ae81df13c72d9dac88878b8280bec1ec20e3ff9d50078f5199ca93c9b9bf8d76ca74e515de88c63cec7b23d10ff7188aecc666c3';
 const SECRET2 = 'asiodfhoi1hoi23jnl1kejasdjlkfasdd';
 
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
@@ -106,7 +106,7 @@ app.use(
   '/graphiql',
   graphiqlExpress({
     endpointURL: graphqlEndpoint,
-    subscriptionsEndpoint: 'ws://localhost:8081/subscriptions',
+    subscriptionsEndpoint: 'ws://10.0.49.122:8081/subscriptions',
   }),
 );
 

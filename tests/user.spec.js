@@ -5,7 +5,7 @@ global.XMLHttpRequest = XMLHttpRequest;
 
 describe('user resolvers', () => {
   test('allUsers', async () => {
-    const response = await axios.post('http://localhost:8081/graphql', {
+    const response = await axios.post('http://10.0.49.122:8081/graphql', {
       query: `
       query {
         allUsers {
@@ -26,7 +26,7 @@ describe('user resolvers', () => {
   });
 
   test('create team', async () => {
-    const response = await axios.post('http://localhost:8081/graphql', {
+    const response = await axios.post('http://10.0.49.122:8081/graphql', {
       query: `
       mutation {
         register(username: "testuser", email: "testuser@testuser.com", password: "tester") {
@@ -58,7 +58,7 @@ describe('user resolvers', () => {
       },
     });
 
-    const response2 = await axios.post('http://localhost:8081/graphql', {
+    const response2 = await axios.post('http://10.0.49.122:8081/graphql', {
       query: `
       mutation {
         login(email: "testuser@testuser.com", password: "tester") {
@@ -72,7 +72,7 @@ describe('user resolvers', () => {
     const { data: { login: { token, refreshToken } } } = response2.data;
 
     const response3 = await axios.post(
-      'http://localhost:8081/graphql',
+      'http://10.0.49.122:8081/graphql',
       {
         query: `
       mutation {

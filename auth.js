@@ -1,6 +1,6 @@
 import jwt from 'jsonwebtoken';
 import _ from 'lodash';
-import bcrypt from 'bcrypt';
+import { verify as verifyToken } from 'jsonwebtoken';
 
 export const createTokens = async (user, secret, secret2) => {
   const createToken = jwt.sign(
@@ -22,7 +22,7 @@ export const createTokens = async (user, secret, secret2) => {
       expiresIn: '7d',
     },
   );
-
+console.log(createToken);
   return [createToken, createRefreshToken];
 };
 
@@ -61,32 +61,35 @@ export const refreshTokens = async (token, refreshToken, models, SECRET, SECRET2
   };
 };
 
-export const tryLogin = async (email, password, models, SECRET, SECRET2) => {
-  const user = await models.User.findOne({ where: { email }, raw: true });
+export const tryLogin = async (token, models, SECRET, SECRET2) => {
+  let decoded;
+  let masterId;
+  try {
+      decoded = verifyToken(token, SECRET);
+      console.log(decoded.id);
+      masterId=decoded.id;
+  } catch(e) {
+      res.send(e)
+  }
+
+  const user = await models.User.findOne({ where: { masterId : masterId }, raw: true });
+
   if (!user) {
     // user with provided email not found
     return {
       ok: false,
-      errors: [{ path: 'email', message: 'Wrong email' }],
-    };
-  }
-
-  const valid = await bcrypt.compare(password, user.password);
-  if (!valid) {
-    // bad password
-    return {
-      ok: false,
-      errors: [{ path: 'password', message: 'Wrong password' }],
+      token:masterId,
+      errors: [{ path: 'email', message: 'Wrong email or Email not registered!' }],
     };
   }
 
   const refreshTokenSecret = user.password + SECRET2;
 
-  const [token, refreshToken] = await createTokens(user, SECRET, refreshTokenSecret);
+  const [newtoken, refreshToken] = await createTokens(user, SECRET, refreshTokenSecret);
 
   return {
     ok: true,
-    token,
-    refreshToken,
+    token: newtoken,
+    refreshToken: refreshToken,
   };
 };

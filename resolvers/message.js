@@ -15,7 +15,7 @@ export default {
     },
   },
   Message: {
-    url: parent => (parent.url ? `http://localhost:8081/${parent.url}` : parent.url),
+    url: parent => (parent.url ? `http://10.0.49.122:8081/${parent.url}` : parent.url),
     user: ({ user, userId }, args, { models }) => {
       if (user) {
         return user;
@@ -25,6 +25,13 @@ export default {
     },
   },
   Query: {
+    getData: (parent, { date1, date2 }, { models }) => models.Message.findAll({
+      where: {
+        createdAt: { 
+          "$between": [date1,date2]
+        }
+      }
+    }),
     messages: requiresAuth.createResolver(async (parent, { cursor, channelId }, { models, user }) => {
       const channel = await models.Channel.findOne({ raw: true, where: { id: channelId } });
 
@@ -52,6 +59,7 @@ export default {
 
       return models.Message.findAll(options, { raw: true });
     }),
+    
   },
   Mutation: {
     createMessage: requiresAuth.createResolver(async (parent, { file, ...args }, { models, user }) => {

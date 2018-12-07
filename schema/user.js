@@ -11,6 +11,7 @@ export default `
     username: String!
     email: String!
     teams: [Team!]!
+    masterId: Int!
   }
 
   type Query {
@@ -33,8 +34,8 @@ export default `
   }
 
   type Mutation {
-    register(username: String!, email: String!, password: String!): RegisterResponse!
-    login(email: String!, password: String!): LoginResponse!
+    register(username: String!, email: String!, password: String!, masterId: Int!): RegisterResponse!
+    login(token: String!): LoginResponse!
   }
 
 `;
