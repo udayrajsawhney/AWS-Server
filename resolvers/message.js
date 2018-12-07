@@ -15,7 +15,7 @@ export default {
     },
   },
   Message: {
-    url: parent => (parent.url ? `http://10.0.49.122:8081/${parent.url}` : parent.url),
+    url: parent => (parent.url ? `http://ec2-52-91-163-175.compute-1.amazonaws.com:8081/${parent.url}` : parent.url),
     user: ({ user, userId }, args, { models }) => {
       if (user) {
         return user;

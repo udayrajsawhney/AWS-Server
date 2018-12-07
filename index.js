@@ -106,7 +106,7 @@ app.use(
   '/graphiql',
   graphiqlExpress({
     endpointURL: graphqlEndpoint,
-    subscriptionsEndpoint: 'ws://10.0.49.122:8081/subscriptions',
+    subscriptionsEndpoint: 'ws://ec2-52-91-163-175.compute-1.amazonaws.com:8081/subscriptions',
   }),
 );
 
