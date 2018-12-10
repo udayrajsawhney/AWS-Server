@@ -22,6 +22,9 @@ Go to each folder
  1)npm install
  2)yarn add subscriptions-transport-ws   (In both server and client)
 
+client/apollo.js
+server/message.js
+server/index.js
 
 create database gratify;
 load data local infile 'millionData.txt' into table messages fields terminated by ',' lines terminated by '\n';
