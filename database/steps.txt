@@ -14,6 +14,7 @@ Install yarn
 Copy paste the folders/ Git Clone them
  1)git clone https://github.com/Gratify-App/AWS-Client.git
  2)git clone https://github.com/Gratify-App/AWS-Server.git
+ 3)git clone https://github.com/Gratify-App/Gratify_Mobile_App.git
 
 Download Redis server
 https://www.digitalocean.com/community/tutorials/how-to-install-and-configure-redis-on-ubuntu-16-04
