@@ -27,6 +27,8 @@ client/apollo.js
 server/message.js
 server/index.js
 
+Change endpoint in index.js
+
 create database gratify;
 load data local infile 'millionData.txt' into table messages fields terminated by ',' lines terminated by '\n';
 Teams->Channels->Members(Edit)->PCMembers->ChannelMembers->Messages->DirectMessages;
