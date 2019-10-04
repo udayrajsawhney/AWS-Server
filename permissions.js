@@ -1,3 +1,4 @@
+const errorMessage = 'Not authenticated'
 const createResolver = (resolver) => {
   const baseResolver = resolver;
   baseResolver.createResolver = (childResolver) => {
@@ -10,17 +11,19 @@ const createResolver = (resolver) => {
   return baseResolver;
 };
 
-// requiresAuth
-export default createResolver((parent, args, { user }) => {
+function checkUser(user) {
   if (!user || !user.id) {
     throw new Error('Not authenticated');
   }
+}
+
+// requiresAuth
+export default createResolver((parent, args, { user }) => {
+  checkUser(user);
 });
 
 export const requiresTeamAccess = createResolver(async (parent, { channelId }, { user, models }) => {
-  if (!user || !user.id) {
-    throw new Error('Not authenticated');
-  }
+  checkUser(user);
   // check if part of the team
   const channel = await models.Channel.findOne({ where: { id: channelId } });
   const member = await models.Member.findOne({
@@ -32,9 +35,7 @@ export const requiresTeamAccess = createResolver(async (parent, { channelId }, {
 });
 
 export const directMessageSubscription = createResolver(async (parent, { teamId, userId }, { user, models }) => {
-  if (!user || !user.id) {
-    throw new Error('Not authenticated');
-  }
+  checkUser(user);
 
   const members = await models.Member.findAll({
     where: {
