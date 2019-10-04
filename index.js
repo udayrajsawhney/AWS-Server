@@ -14,8 +14,8 @@ import formidable from 'formidable';
 import models from './models';
 import { refreshTokens } from './auth';
 
-const SECRET = '31e0a8d38ad738fcf4f4f996ae81df13c72d9dac88878b8280bec1ec20e3ff9d50078f5199ca93c9b9bf8d76ca74e515de88c63cec7b23d10ff7188aecc666c3';
-const SECRET2 = 'asiodfhoi1hoi23jnl1kejasdjlkfasdd';
+const SECRET = 'INSERT_SECRET_1';
+const SECRET2 = 'INSERT_SECRET_2';
 
 const typeDefs = mergeTypes(fileLoader(path.join(__dirname, './schema')));
 
